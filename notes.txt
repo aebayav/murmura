@@ -1,0 +1,5 @@
+color palete:
+#1A120B rgb(26, 18, 11)
+3C2A21 rgb(60, 42, 33)
+D5CEA3 rgb(213, 206, 163)
+E5E5CB rgb(229, 229, 203)

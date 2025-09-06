@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+.page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+body{
+    font-family: "Open Sans";
+    background-color: #F1F0E4;
+    color: #3E3F29;
+    min-height: auto;
+}
+
+.first-page-container {
+    flex: 1;
+}
+.first-page-title {
+    text-align: center;
+    padding-top: 5%;
+    font-size: 3rem;
+    color: #3E3F29;
+}
+.first-page-explain{
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 2em;
+    text-align: center ;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    color: #3E3F29;
+    
+
+}
+
+.first-page-buttons {
+    display: flex;
+    justify-content: center; /* yatayda ortalama */
+    align-items: center;     /* dikeyde ortalama */
+    gap: 10px;
+}
+
+.first-page-buttons button{
+    font-size: 2em;
+    margin: 10px;
+    min-width: 120px;   
+    padding: 10px 20px; /* iç boşluk */
+    background-color: #7D8D86;
+    color: #3E3F29;
+    border: 2px solid #3E3F29;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ;
+}
+
+.first-page-buttons button:hover{
+    background-color: #3E3F29;
+    color: #F1F0E4;
+    
+}
