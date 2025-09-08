@@ -1,6 +1,6 @@
 import dotenv from "dotenv"
 import { Client,Pool } from "pg"
-import logger from "./logger"
+import logger from "./logger.js"
 
 dotenv.config()
 const dbUser = process.env.POSTGRE_USER

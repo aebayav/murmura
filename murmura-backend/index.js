@@ -2,6 +2,7 @@ import express from "express"
 import { migrateTables, createPool } from "./utils/database.js"
 import {requestLogger,unknownEndpoint} from "./utils/middleware.js"
 import postsRouter from "./routes/posts.routes.js"
+import logger from "./utils/logger.js"
 
 const app = express()
 app.use(express.json())
