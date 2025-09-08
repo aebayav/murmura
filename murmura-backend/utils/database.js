@@ -1,5 +1,6 @@
 import dotenv from "dotenv"
 import { Client,Pool } from "pg"
+import logger from "./logger"
 
 dotenv.config()
 const dbUser = process.env.POSTGRE_USER
@@ -58,9 +59,9 @@ export async function migrateTables() {
                 for (const sql of migrationStatements) {
                         await client.query(sql);
                 }
-                console.log('Migration completed successfully.');
+                logger.info('Migration completed successfully.');
         } catch (err) {
-                console.log('Migration error:', err);
+                logger.info('Migration error:', err);
         } finally {
                 await client.end();
         }
@@ -81,7 +82,7 @@ export function createPool() {
             connectionTimeoutMillis: 2000,
             maxLifetimeSeconds: 60
         });
-        console.log("Pool created successfuly")
+        logger.info("Pool created successfuly")
     }
     return pool;
 }

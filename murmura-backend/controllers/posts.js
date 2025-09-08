@@ -1,5 +1,6 @@
 import express, { json } from "express"
 import { getPool } from "../utils/database.js"
+import logger from "../utils/logger.js"
 
 
 export const newPost = async (request,response) => {
@@ -11,11 +12,11 @@ export const newPost = async (request,response) => {
     }
     try{
         const result = await pool.query(sql, [user_id,content])
-        console.log(JSON.stringify(result.rows))
+        logger.info(JSON.stringify(result.rows))
         return response.status(201).send({message:"new post created successfully"})
     }
     catch(err){
-        console.log("Error:",err)
+        logger.error("Error:",err)
     }
 }
 

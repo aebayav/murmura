@@ -14,5 +14,5 @@ app.use(unknownEndpoint)
 app.listen(3000, () => {
     migrateTables()
     createPool()
-    console.log(`Server listens port 3000`)
+    logger.info(`Server listens port 3000`)
 })
