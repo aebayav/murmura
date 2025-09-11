@@ -4,11 +4,12 @@ import {requestLogger,unknownEndpoint} from "./utils/middleware.js"
 import postsRouter from "./routes/posts.routes.js"
 import logger from "./utils/logger.js"
 import usersRouter from "./routes/users.routes.js"
+import cors from "cors"
 
 const app = express()
 app.use(express.json())
 app.use(requestLogger)
-
+app.use(cors())
 
 app.use('/api/posts', postsRouter)
 app.use('/api/users', usersRouter)

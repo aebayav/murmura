@@ -1,18 +1,24 @@
 import { useState } from "react"
 import '../assets/css/RegisterPage.css'
-const RegisterPage = () => {
+const RegisterPage = ({handleRegister}) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [email,setEmail] = useState('')
-    const [birthDate, setBirthDate] = useState('')
-    const handleRegister = (event) =>{
-        event.preventDefault()
-        console.log(username,password,email,birthDate)
-        
-    }   
+    const [birthDate, setBirthDate] = useState('')   
+
+    const onSubmit = (event) => {
+        event.preventDefault();
+        handleRegister({
+            username,
+            password,
+            email,
+            birth_date: birthDate
+        });
+    };
+
     return(
         <div className="register-form-container">
-            <form className="register-form" onSubmit={handleRegister}>
+            <form className="register-form" onSubmit={onSubmit}>
                 <label className="register-form-label">
                     Username
                     <input className="register-form-input" value={username} type="text" onChange={(event) => {setUsername(event.target.value)}}/>
