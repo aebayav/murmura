@@ -21,21 +21,21 @@ const RegisterPage = ({handleRegister}) => {
             <form className="register-form" onSubmit={onSubmit}>
                 <label className="register-form-label">
                     Username
-                    <input className="register-form-input" value={username} type="text" onChange={(event) => {setUsername(event.target.value)}}/>
+                    <input placeholder="Username" className="register-form-input" value={username} type="text" onChange={(event) => {setUsername(event.target.value)}}/>
                 </label><br/>
                 <label>
                     Password
-                    <input className="register-form-input" value={password} type="password" onChange={(event) => {setPassword(event.target.value)}}/>
+                    <input placeholder="Password" className="register-form-input" value={password} type="password" onChange={(event) => {setPassword(event.target.value)}}/>
                 </label><br/>
                 <label>
                     E-mail
-                    <input className="register-form-input" value= {email} type="email" onChange={(event) => {setEmail(event.target.value)}}/>
+                    <input placeholder="E-mail" className="register-form-input" value= {email} type="email" onChange={(event) => {setEmail(event.target.value)}}/>
                 </label><br/>
                 <label>
                     Birth Date
-                    <input className="register-form-input" value={birthDate} type="date" onChange={(event) => {setBirthDate(event.target.value)}}/>
+                    <input placeholder="Birth Date" className="register-form-input" value={birthDate} type="date" onChange={(event) => {setBirthDate(event.target.value)}}/>
                 </label><br/>
-                <input className= "btn-submit" type="submit" value={"Submit"}/>
+                <input className= "btn-submit" type="submit" value={"Register"}/>
             </form>
         </div>
     )
