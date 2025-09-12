@@ -51,7 +51,6 @@ export const loginUser = async (request, response) => {
         })
 
         const message= {
-            username:username,
             token:userToken
         }
 
