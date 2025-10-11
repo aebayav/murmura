@@ -1,3 +1,31 @@
+.logout-btn {
+    background: #7D8D86;
+    color: #fff;
+    border: 2px solid #3E3F29;
+    border-radius: 8px;
+    padding: 0.5rem 1.5rem;
+    font-weight: bold;
+    margin-left: auto;
+    transition: background 0.2s, color 0.2s;
+}
+.logout-btn:hover {
+    background: #3E3F29;
+    color: #F1F0E4;
+}
+.special-logout {
+    background: #7D8D86;
+    color: #fff;
+    border: 2px solid #3E3F29;
+    border-radius: 8px;
+    padding: 0.5rem 1.5rem;
+    font-weight: bold;
+    margin-left: auto;
+    transition: background 0.2s, color 0.2s;
+}
+.special-logout:hover {
+    background: #3E3F29;
+    color: #F1F0E4;
+}
 .nav-bar {
     display: flex;
     align-items: center;
@@ -22,3 +50,4 @@
 .nav-bar a:hover, .nav-bar button:hover {
     color: #7D8D86;
 }
+

@@ -3,7 +3,9 @@ import Footer from './Footer'
 import {Link} from "react-router-dom"
 
 const FirstPage = () => {
-  return (
+  const userToken = window.localStorage.getItem("activeUser")
+  if(!userToken){
+    return(
     <div className="page-wrapper">
       <div className="first-page-container">
         <h3 className="first-page-title">
@@ -24,7 +26,11 @@ const FirstPage = () => {
       </div>
       <Footer/>
     </div>
-  )
+    )
+  }
+  else{
+    window.location.replace("http://localhost:5173/home")
+  }
 }
 
 export default FirstPage
