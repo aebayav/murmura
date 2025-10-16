@@ -1,0 +1,31 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+@theme {
+  --color-background-primary: #1a1625;
+  --color-background-secondary: #242132;
+  --color-background-tertiary: #2d2838;
+  --color-surface-primary: #3a3447;
+  --color-surface-secondary: #4a4458;
+  --color-surface-hover: #5a5468;
+  --color-text-primary: #e8d5d5;
+  --color-text-secondary: #c9b3c5;
+  --color-text-tertiary: #a89ba8;
+  --color-accent-primary: #9b8ba3;
+  --color-accent-secondary: #8a7a92;
+  --color-accent-tertiary: #7a6a82;
+  --color-pastel-pink: #d4a5b5;
+  --color-pastel-purple: #b39dbd;
+  --color-pastel-blue: #9bafc7;
+  --color-pastel-green: #a8c4a8;
+  --color-pastel-yellow: #d4c5a5;
+  --color-border-primary: #4a4458;
+  --color-border-secondary: #5a5468;
+  --font-family-sans: "Open Sans", Arial, sans-serif;
+}
+
+body {
+  background-color: var(--color-background-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-sans);
+}
