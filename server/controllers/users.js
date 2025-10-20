@@ -36,11 +36,11 @@ export const loginUser = async (request, response) => {
         const dbResult = await pool.query(sql, [username]);
         const user = dbResult.rows[0];
         if (!user) {
-            return response.status(401).send({ message: "invalid username or password" });
+            return response.status(401).send({ message: "Invalid username or password" });
         }
         const comparePassword = await bcrypt.compare(password, user.password_hash);
         if (!comparePassword) {
-            return response.status(401).send({ message: "invalid username or password" });
+            return response.status(401).send({ message: "Invalid username or password" });
         }
         const userForToken = {
             username:user.username,
