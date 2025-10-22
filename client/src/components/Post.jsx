@@ -2,13 +2,23 @@ const Post = ({post}) => {
     if (!post || !post.content) {
         return null; // or return a fallback UI
     }
+    
+    // Format date to dd-mm-yyyy
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    };
+    
     return (
         <div className="bg-surface-primary rounded-xl p-6 mb-4 shadow-lg border border-border-primary hover:border-accent-primary transition-all duration-200">
             <p className="text-text-primary text-lg mb-3">{post.content}</p>
-            <p className="text-text-tertiary text-sm mb-2">{post.created_at}</p>
+            <p className="text-text-tertiary text-sm mb-2">{formatDate(post.created_at)}</p>
             <div className="flex items-center gap-4">
                 <p className="text-pastel-pink font-semibold">❤️ {post.likes_count}</p>
-                <button type="button" className="px-4 py-2 bg-pastel-purple text-background-primary rounded-lg hover:bg-pastel-blue transition-colors duration-200 font-semibold">Like</button>
+                <button type="button" className="px-4 py-2 bg-pastel-purple text-background-primary rounded-lg hover:bg-pastel-blue transition-colors duration-200 font-semibold cursor-pointer">Like</button>
             </div>
         </div>
     );
