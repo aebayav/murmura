@@ -17,6 +17,7 @@ const migrationStatements = [
         id SERIAL PRIMARY KEY,
         user_id INT REFERENCES users(id) ON DELETE SET NULL,
         content TEXT NOT NULL,
+        category VARCHAR(100),
         created_at TIMESTAMP DEFAULT NOW(),
         likes_count INT DEFAULT 0
     )`,
@@ -42,7 +43,8 @@ const migrationStatements = [
         post_id INT REFERENCES posts(id) ON DELETE CASCADE,
         category_id INT REFERENCES categories(id) ON DELETE CASCADE,
         PRIMARY KEY(post_id, category_id)
-    )`
+    )`,
+    `ALTER TABLE posts ADD COLUMN IF NOT EXISTS category VARCHAR(100)`
 ];
 
 export async function migrateTables() {
