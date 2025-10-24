@@ -11,7 +11,7 @@ const login = async credentials=> {
             window.localStorage.setItem("activeUser", JSON.stringify(token))
             window.location.replace("http://localhost:5173/home")
         }
-        return token 
+        return token
     }
     catch(error) {
         // Axios stores the response in error.response

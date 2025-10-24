@@ -4,12 +4,17 @@ import postService from "../utils/posts.js"
 
 import { useEffect, useState } from "react";
 
-const PostGallery = () => {
+const PostGallery = ({ refreshTrigger }) => {
     
     const [posts, setPosts] = useState([]);
-    useEffect(() => {
+    
+    const fetchPosts = () => {
         postService.getAll().then(posts => setPosts(posts));
-    }, []);
+    };
+    
+    useEffect(() => {
+        fetchPosts();
+    }, [refreshTrigger]); // Re-fetch when refreshTrigger changes
 
     return(
         <div className="bg-background-primary min-h-screen p-6">

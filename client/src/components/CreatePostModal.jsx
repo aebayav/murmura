@@ -1,19 +1,37 @@
 import { useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
+import postsService from "../utils/posts.js"
 
-const CreatePostModal = ({ isOpen, onClose }) => {
+const CreatePostModal = ({ isOpen, onClose, onPostCreated }) => {
     const [content, setContent] = useState('');
     const [category, setCategory] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // TODO: Add backend communication here later
-        console.log('Post data:', { content, category });
         
-        // Clear form
-        setContent('');
-        setCategory('');
-        onClose();
+        try {
+            // Create post (token is handled inside posts.js)
+            const newPost = {
+                content: content,
+                category: category
+            };
+            
+            await postsService.create(newPost);
+            console.log('Post created successfully!');
+            
+            // Refresh posts after creation
+            if (onPostCreated) {
+                onPostCreated();
+            }
+            
+            // Clear form and close modal
+            setContent('');
+            setCategory('');
+            onClose();
+        } catch (error) {
+            console.error('Error creating post:', error);
+            alert(error.message || 'Failed to create post. Please try again.');
+        }
     };
 
     if (!isOpen) return null;

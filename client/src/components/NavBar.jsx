@@ -3,7 +3,7 @@ import { FaHome, FaUser, FaQuestionCircle, FaSignOutAlt, FaPlus, FaDoorOpen } fr
 import { useState } from "react"
 import CreatePostModal from "./CreatePostModal"
 
-const NavBar = () => {
+const NavBar = ({ onPostCreated }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const userToken = window.localStorage.getItem('activeUser')
     const logOut = () => {
@@ -56,7 +56,11 @@ const NavBar = () => {
             </button>
             
             {/* Create Post Modal */}
-            <CreatePostModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <CreatePostModal 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)}
+                onPostCreated={onPostCreated}
+            />
         </nav>
         )   
     }
