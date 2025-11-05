@@ -8,14 +8,10 @@ const getAll = () => {
     return request.then(response => response.data)
 }
 
-const setToken = newToken => {
-    token = `Bearer ${newToken}`
-}
 
 const create = async newObject => {
   // Get token from localStorage
-  const userToken = window.localStorage.getItem('activeUser');
-  const tokenData = JSON.parse(userToken);
+  const userToken = decoder()
   
   const postData = {
     ...newObject,
@@ -26,6 +22,22 @@ const create = async newObject => {
   return response.data
 }
 
+const decoder = () => {
+  const userToken = window.localStorage.getItem('activeUser')
+  return JSON.parse(userToken)
+}
 
 
-export default {getAll, setToken, create}
+const edit = async (editedObject, postId)=> {
+  const userToken = decoder()
+  const editedData = {
+    ...editedObject,
+    userToken: userToken.token
+  }
+
+  const response = axios.put(`${baseUrl}/${id}`, {userToken, editedData})
+  return response.data
+
+}
+
+export default {getAll, create,edit}
