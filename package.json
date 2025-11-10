@@ -3,14 +3,21 @@
   "version": "1.0.0",
   "description": "Murmura - A social media platform",
   "private": true,
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "scripts": {
     "dev:client": "cd client && npm run dev",
-    "dev:server": "cd server && npm start",
+    "dev:server": "cd server && npm run dev",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "start:server": "cd server && npm start",
     "install:client": "cd client && npm install",
     "install:server": "cd server && npm install",
     "install:all": "npm run install:client && npm run install:server",
-    "build:client": "cd client && npm run build"
+    "build:client": "cd client && npm run build",
+    "build": "npm run build:client",
+    "preview": "cd client && npm run preview"
   },
   "keywords": ["social-media", "react", "express", "postgresql"],
   "author": "murmura",

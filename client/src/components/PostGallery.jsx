@@ -27,9 +27,9 @@ const PostGallery = ({ refreshTrigger }) => {
                 className="max-w-3xl mx-auto"
             >
                 {posts.map(post => (
-                    <Post key={post.id} post={post} className={post.id}/>
+                    <Post key={post.id} post={post} onPostUpdated={fetchPosts} className={post.id}/>
                 ))}
-            </InfiniteScroll>
+            </InfiniteScroll>  
         </div>
     );
 }

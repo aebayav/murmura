@@ -5,6 +5,9 @@ import logger from "./logger.js"
 dotenv.config()
 const dbUser = process.env.POSTGRE_USER
 const dbPass = process.env.POSTGRE_PASS
+const dbHost = process.env.POSTGRE_HOST || 'localhost'
+const dbPort = process.env.POSTGRE_PORT || 5432
+const dbName = process.env.POSTGRE_DB || 'postgres'
 
 const migrationStatements = [
     `CREATE TABLE IF NOT EXISTS users (
@@ -28,6 +31,8 @@ const migrationStatements = [
         created_at TIMESTAMP DEFAULT NOW(),
         UNIQUE(post_id, user_id)
     )`,
+    `CREATE INDEX IF NOT EXISTS idx_likes_post_id ON likes(post_id)`,
+    `CREATE INDEX IF NOT EXISTS idx_likes_user_id ON likes(user_id)`,
     `CREATE TABLE IF NOT EXISTS comments (
         id SERIAL PRIMARY KEY,
         post_id INT REFERENCES posts(id) ON DELETE CASCADE,
@@ -51,9 +56,9 @@ export async function migrateTables() {
         const client = new Client({
                 user: dbUser,
                 password: dbPass,
-                host: 'localhost',
-                port: 5432,
-                database: 'postgres'
+                host: dbHost,
+                port: dbPort,
+                database: dbName
         });
 
         try {
@@ -63,7 +68,8 @@ export async function migrateTables() {
                 }
                 logger.info('Migration completed successfully.');
         } catch (err) {
-                logger.info('Migration error:', err);
+                logger.error('Migration error:', err);
+                throw err; // Fail fast on migration errors
         } finally {
                 await client.end();
         }
@@ -74,17 +80,24 @@ let pool;
 export function createPool() {
     if (!pool) {
         pool = new Pool({
-            host: 'localhost',
+            host: dbHost,
             user: dbUser,
             password: dbPass,
-            port: 5432,
-            database: 'postgres',
+            port: dbPort,
+            database: dbName,
             max: 20,
             idleTimeoutMillis: 30000,
             connectionTimeoutMillis: 2000,
             maxLifetimeSeconds: 60
         });
-        logger.info("Pool created successfuly")
+        
+        // Handle pool errors
+        pool.on('error', (err) => {
+            logger.error('Unexpected error on idle client', err)
+            process.exit(-1)
+        })
+        
+        logger.info("Database pool created successfully")
     }
     return pool;
 }

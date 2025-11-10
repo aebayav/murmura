@@ -1,11 +1,31 @@
 import axios from "axios";
-const baseUrl = "http://localhost:3000/api/posts"
+import config from "../config.js";
+
+const baseUrl = `${config.apiUrl}/posts`
 
 let token = null
 
-const getAll = () => {
-    const request = axios.get(baseUrl)
-    return request.then(response => response.data)
+const decoder = () => {
+  const userToken = window.localStorage.getItem('activeUser')
+  return JSON.parse(userToken)
+}
+
+const getAll = async () => {
+    try {
+        const userToken = decoder()
+        
+        const response = await axios.get(baseUrl, {
+            params: { 
+                userToken: userToken?.token  // Send token as query param
+            }
+        })
+        
+        return response.data
+    } catch (err) {
+        // If not logged in, get posts without user context
+        const response = await axios.get(baseUrl)
+        return response.data
+    }
 }
 
 
@@ -15,18 +35,12 @@ const create = async newObject => {
   
   const postData = {
     ...newObject,
-    userToken: tokenData.token
+    userToken: userToken.token
   };
   
   const response = await axios.post(baseUrl, postData)
   return response.data
 }
-
-const decoder = () => {
-  const userToken = window.localStorage.getItem('activeUser')
-  return JSON.parse(userToken)
-}
-
 
 const edit = async (editedObject, postId)=> {
   const userToken = decoder()
@@ -35,9 +49,26 @@ const edit = async (editedObject, postId)=> {
     userToken: userToken.token
   }
 
-  const response = axios.put(`${baseUrl}/${id}`, {userToken, editedData})
+  const response = axios.put(`${baseUrl}/${postId}`, {userToken, editedData})
   return response.data
 
 }
 
-export default {getAll, create,edit}
+const deletePost = async (postId) => {
+  const userToken = decoder()
+  console.log("Deleting post ID:", postId)
+  console.log("Delete URL:", `${baseUrl}/${postId}`)
+  const response = await axios.delete(`${baseUrl}/${postId}`, {
+    data: {userToken: userToken.token}  // Send the token string
+  })
+  return response.data
+}
+
+const like = async (postId) => {
+  const userToken = decoder()
+  
+  const responce = await axios.post(`${baseUrl}/${postId}/like `, {
+    userToken: userToken.token
+  })
+}
+export default {getAll, create,edit, deletePost, like}

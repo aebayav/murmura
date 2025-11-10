@@ -1,5 +1,7 @@
 import axios from "axios"
-const baseUrl = "http://localhost:3000/api/users"
+import config from "../config.js"
+
+const baseUrl = `${config.apiUrl}/users`
 
 const register = async credentials => {
     try {

@@ -5,15 +5,25 @@ server/node_modules/
 
 # Environment variables
 .env
+.env.local
+.env.production
+.env.development
 server/.env
+server/.env.local
+server/.env.production
+client/.env
+client/.env.local
+client/.env.production
 
 # Build output
 client/dist/
 client/build/
+server/dist/
 
 # Logs
 *.log
 npm-debug.log*
+logs/
 
 # OS files
 .DS_Store
@@ -25,8 +35,8 @@ Thumbs.db
 *.swp
 *.swo
 
-# Old folders (to be deleted manually)
-murmura-frontend-old/
-murmura-backend-old/
-murmura-frontend/
-murmura-backend/
+# Testing
+coverage/
+
+# Production
+*.tgz
