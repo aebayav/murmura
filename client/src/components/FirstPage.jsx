@@ -28,7 +28,7 @@ const FirstPage = () => {
     )
   }
   else{
-    window.location.replace("http://localhost:5173/home")
+    window.location.replace("/home")
   }
 }
 

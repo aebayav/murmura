@@ -65,7 +65,7 @@ const NavBar = ({ onPostCreated }) => {
         )   
     }
     else{
-        window.location.replace("http://localhost:5173/login")
+        window.location.replace("/login")
     }
     
 }
