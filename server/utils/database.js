@@ -12,8 +12,10 @@ const dbName = process.env.POSTGRE_DB || 'postgres'
 const migrationStatements = [
     `CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
+        username VARCHAR(100) UNIQUE NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL,
         password_hash VARCHAR(255) NOT NULL,
+        birth_date DATE,
         created_at TIMESTAMP DEFAULT NOW()
     )`,
     `CREATE TABLE IF NOT EXISTS posts (
