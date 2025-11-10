@@ -1,0 +1,9 @@
+/* Redirects for React Router */
+/*    /index.html   200
+
+/* Headers for security */
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
