@@ -51,7 +51,9 @@ const migrationStatements = [
         category_id INT REFERENCES categories(id) ON DELETE CASCADE,
         PRIMARY KEY(post_id, category_id)
     )`,
-    `ALTER TABLE posts ADD COLUMN IF NOT EXISTS category VARCHAR(100)`
+    `ALTER TABLE posts ADD COLUMN IF NOT EXISTS category VARCHAR(100)`,
+    `ALTER TABLE users ADD COLUMN IF NOT EXISTS username VARCHAR(100) UNIQUE`,
+    `ALTER TABLE users ADD COLUMN IF NOT EXISTS birth_date DATE`
 ];
 
 export async function migrateTables() {
