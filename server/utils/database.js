@@ -6,7 +6,7 @@ dotenv.config()
 const dbUser = process.env.POSTGRE_USER
 const dbPass = process.env.POSTGRE_PASS
 const dbHost = process.env.POSTGRE_HOST || 'localhost'
-const dbPort = process.env.POSTGRE_PORT || 5432
+const dbPort = process.env.POSTGRE_PORT 
 const dbName = process.env.POSTGRE_DB || 'postgres'
 
 const migrationStatements = [
