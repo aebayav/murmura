@@ -12,7 +12,8 @@ const HomePage = () => {
     return(
     <div className="flex min-h-screen bg-background-primary">
         <NavBar onPostCreated={handlePostCreated}/>
-        <main className="ml-64 flex-1">
+        {/* Responsive main content - adapts to mobile and desktop */}
+        <main className="pt-16 lg:pt-0 lg:ml-64 flex-1 w-full">
             <PostGallery refreshTrigger={refreshTrigger}/>
         </main>
     </div>   

@@ -84,10 +84,10 @@ const Post = ({ post, onPostUpdated }) => {
   };
 
   return (
-    <div className="relative bg-surface-primary rounded-xl p-6 mb-4 shadow-lg border border-border-primary hover:border-accent-primary transition-all duration-200">
+    <div className="relative bg-surface-primary rounded-xl p-4 sm:p-6 mb-4 shadow-lg border border-border-primary hover:border-accent-primary transition-all duration-200">
       {/* Kebab Button */}
       <button
-        className="absolute top-4 right-4 p-2 hover:bg-surface-secondary rounded-full transition-colors text-text-secondary hover:text-text-primary"
+        className="absolute top-3 right-3 sm:top-4 sm:right-4 p-2 hover:bg-surface-secondary rounded-full transition-colors text-text-secondary hover:text-text-primary"
         onClick={(e) => {
           e.stopPropagation();
           setIsDropdown(!isDropdown);
@@ -99,7 +99,7 @@ const Post = ({ post, onPostUpdated }) => {
       {/* Dropdown Menu */}
       {isDropdown && (
         <div 
-          className="absolute top-12 right-4 bg-surface-secondary rounded-lg shadow-xl border border-border-primary py-2 min-w-[120px] z-10"
+          className="absolute top-10 right-3 sm:top-12 sm:right-4 bg-surface-secondary rounded-lg shadow-xl border border-border-primary py-2 min-w-[120px] z-10"
           onClick={(e) => e.stopPropagation()}
         >
           <button
@@ -122,21 +122,21 @@ const Post = ({ post, onPostUpdated }) => {
       )}
 
       {/* Post Content */}
-      <p className="text-text-primary text-lg mb-3">{post.content}</p>
-      <p className="text-text-tertiary text-sm mb-2">
+      <p className="text-text-primary text-base sm:text-lg mb-3 pr-8">{post.content}</p>
+      <p className="text-text-tertiary text-xs sm:text-sm mb-2">
         {formatDate(post.created_at)}
       </p>
 
       {/* Like Section */}
-      <div className="flex items-center gap-4">
-        <p className="text-pastel-pink font-semibold">
+      <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
+        <p className="text-pastel-pink font-semibold text-sm sm:text-base">
         ❤️ {likes_count}
       </p>
       <button
         type="button"
         onClick={handleLike}
         disabled={isLiking}
-        className={`px-4 py-2 rounded-lg transition-colors duration-200 font-semibold cursor-pointer ${
+        className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg transition-colors duration-200 font-semibold cursor-pointer text-sm sm:text-base ${
           isLiked 
             ? 'bg-pastel-pink text-white' 
             : 'bg-pastel-purple text-background-primary hover:bg-pastel-blue'
@@ -156,20 +156,20 @@ const Post = ({ post, onPostUpdated }) => {
 
       {/* Delete Confirmation Modal */}
       {showDeleteConfirm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999]">
-          <div className="bg-surface-primary rounded-xl p-6 max-w-md w-full mx-4 border border-border-primary">
-            <h3 className="text-text-primary text-xl font-semibold mb-4">Delete Post</h3>
-            <p className="text-text-secondary mb-6">Are you sure you want to delete this post? This action cannot be undone.</p>
-            <div className="flex gap-3 justify-end">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999] p-4">
+          <div className="bg-surface-primary rounded-xl p-4 sm:p-6 max-w-md w-full border border-border-primary">
+            <h3 className="text-text-primary text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Delete Post</h3>
+            <p className="text-text-secondary text-sm sm:text-base mb-4 sm:mb-6">Are you sure you want to delete this post? This action cannot be undone.</p>
+            <div className="flex gap-2 sm:gap-3 justify-end">
               <button
                 onClick={cancelDelete}
-                className="px-4 py-2 bg-surface-secondary text-text-primary rounded-lg hover:bg-surface-tertiary transition-colors"
+                className="px-3 py-1.5 sm:px-4 sm:py-2 bg-surface-secondary text-text-primary rounded-lg hover:bg-surface-tertiary transition-colors text-sm sm:text-base"
               >
                 Cancel
               </button>
               <button
                 onClick={confirmDelete}
-                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                className="px-3 py-1.5 sm:px-4 sm:py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm sm:text-base"
               >
                 Delete
               </button>
