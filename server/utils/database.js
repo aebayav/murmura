@@ -3,11 +3,13 @@ import { Client,Pool } from "pg"
 import logger from "./logger.js"
 
 dotenv.config()
-const dbUser = process.env.POSTGRE_USER
-const dbPass = process.env.POSTGRE_PASS
-const dbHost = process.env.POSTGRE_HOST || 'localhost'
-const dbPort = process.env.POSTGRE_PORT 
-const dbName = process.env.POSTGRE_DB || 'postgres'
+
+// Support both Railway native variables (PGHOST, PGUSER, etc.) and custom POSTGRE_* variables
+const dbUser = process.env.POSTGRE_USER || process.env.PGUSER
+const dbPass = process.env.POSTGRE_PASS || process.env.PGPASSWORD
+const dbHost = process.env.POSTGRE_HOST || process.env.PGHOST || 'localhost'
+const dbPort = process.env.POSTGRE_PORT || process.env.PGPORT || 5432
+const dbName = process.env.POSTGRE_DB || process.env.PGDATABASE || 'postgres'
 
 const migrationStatements = [
     `CREATE TABLE IF NOT EXISTS users (
