@@ -107,15 +107,17 @@ export const getAllPost = async (request, response) => {
             }
         }
         
-        // Get posts with like status for current user
+        // Get posts with like status and username
         const sql = `
             SELECT 
                 posts.*,
+                users.username,
                 CASE 
                     WHEN likes.user_id IS NOT NULL THEN true 
                     ELSE false 
                 END as is_liked_by_user
             FROM posts
+            INNER JOIN users ON posts.user_id = users.id
             LEFT JOIN likes ON posts.id = likes.post_id AND likes.user_id = $1
             ORDER BY posts.created_at DESC
         `;

@@ -122,6 +122,11 @@ const Post = ({ post, onPostUpdated }) => {
       )}
 
       {/* Post Content */}
+      {post.username && (
+        <p className="text-accent-primary text-sm sm:text-base font-semibold mb-2">
+          @{post.username}
+        </p>
+      )}
       <p className="text-text-primary text-base sm:text-lg mb-3 pr-8">{post.content}</p>
       <p className="text-text-tertiary text-xs sm:text-sm mb-2">
         {formatDate(post.created_at)}

@@ -7,6 +7,9 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  VITE_API_URL = "https://murmura-production.up.railway.app/api"
+  VITE_APP_NAME = "Murmura"
+  VITE_APP_ENVIRONMENT = "production"
 
 [[redirects]]
   from = "/login"
