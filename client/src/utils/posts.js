@@ -1,74 +1,35 @@
-import axios from "axios";
-import config from "../config.js";
+import axiosInstance from "./axiosInstance.js"
 
-const baseUrl = `${config.apiUrl}/posts`
-
-let token = null
-
-const decoder = () => {
-  const userToken = window.localStorage.getItem('activeUser')
-  return JSON.parse(userToken)
-}
+const baseUrl = '/posts'
 
 const getAll = async () => {
     try {
-        const userToken = decoder()
-        
-        const response = await axios.get(baseUrl, {
-            params: { 
-                userToken: userToken?.token  // Send token as query param
-            }
-        })
-        
+        const response = await axiosInstance.get(baseUrl)
         return response.data
     } catch (err) {
-        // If not logged in, get posts without user context
-        const response = await axios.get(baseUrl)
-        return response.data
+        console.error("Error fetching posts:", err)
+        throw err
     }
 }
 
-
 const create = async newObject => {
-  // Get token from localStorage
-  const userToken = decoder()
-  
-  const postData = {
-    ...newObject,
-    userToken: userToken.token
-  };
-  
-  const response = await axios.post(baseUrl, postData)
-  return response.data
+    const response = await axiosInstance.post(baseUrl, newObject)
+    return response.data
 }
 
 const edit = async (editedObject, postId)=> {
-  const userToken = decoder()
-  const editedData = {
-    ...editedObject,
-    userToken: userToken.token
-  }
-
-  const response = axios.put(`${baseUrl}/${postId}`, {userToken, editedData})
-  return response.data
-
+    const response = await axiosInstance.put(`${baseUrl}/${postId}`, editedObject)
+    return response.data
 }
 
 const deletePost = async (postId) => {
-  const userToken = decoder()
-  console.log("Deleting post ID:", postId)
-  console.log("Delete URL:", `${baseUrl}/${postId}`)
-  const response = await axios.delete(`${baseUrl}/${postId}`, {
-    data: {userToken: userToken.token}  // Send the token string
-  })
-  return response.data
+    const response = await axiosInstance.delete(`${baseUrl}/${postId}`)
+    return response.data
 }
 
 const like = async (postId) => {
-  const userToken = decoder()
-  
-  const responce = await axios.post(`${baseUrl}/${postId}/like `, {
-    userToken: userToken.token
-  })
+    const response = await axiosInstance.post(`${baseUrl}/${postId}/like`)
+    return response.data
 }
-export default {getAll, create,edit, deletePost, like}
+
+export default {getAll, create, edit, deletePost, like}

@@ -55,7 +55,19 @@ const migrationStatements = [
     )`,
     `ALTER TABLE posts ADD COLUMN IF NOT EXISTS category VARCHAR(100)`,
     `ALTER TABLE users ADD COLUMN IF NOT EXISTS username VARCHAR(100) UNIQUE`,
-    `ALTER TABLE users ADD COLUMN IF NOT EXISTS birth_date DATE`
+    `ALTER TABLE users ADD COLUMN IF NOT EXISTS birth_date DATE`,
+    
+    `CREATE TABLE IF NOT EXISTS refresh_tokens (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        token TEXT NOT NULL UNIQUE,
+        expires_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        is_revoked BOOLEAN DEFAULT FALSE
+    )`,
+
+    `CREATE INDEX IF NOT EXISTS idx_refresh_tokens_user_id ON refresh_tokens(user_id);`,
+    `CREATE INDEX IF NOT EXISTS idx_refresh_tokens_token ON refresh_tokens(token);`
 ];
 
 export async function migrateTables() {

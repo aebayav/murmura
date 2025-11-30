@@ -2,15 +2,29 @@ import { Link } from "react-router-dom"
 import { FaHome, FaUser, FaQuestionCircle, FaSignOutAlt, FaPlus, FaDoorOpen, FaBars, FaTimes } from "react-icons/fa"
 import { useState } from "react"
 import CreatePostModal from "./CreatePostModal"
+import axios from "axios"
+import {logout} from "../utils/login.js"
 
 const NavBar = ({ onPostCreated }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const userToken = window.localStorage.getItem('activeUser')
     
-    const logOut = () => {
-        window.localStorage.removeItem("activeUser")
-        window.location.reload()
+    const logOut = async () =>{
+        if (userToken) {
+            try {
+                // We need to parse the stringified object from local storage
+                const parsedToken = JSON.parse(userToken)
+                await logout(parsedToken)
+            } catch (error) {
+                console.error("Logout failed", error)
+                // Fallback: force clear if parsing or request fails
+                window.localStorage.removeItem("activeUser")
+                window.location.replace("/login")
+            }
+        } else {
+            window.location.replace("/login")
+        }
     }
     
     const closeMobileMenu = () => {
@@ -34,7 +48,7 @@ const NavBar = ({ onPostCreated }) => {
         {/* Mobile Menu Overlay */}
         {isMobileMenuOpen && (
             <div 
-                className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+                className="lg:hidden fixed inset-0 bg-background-primary bg-opacity-80 z-40"
                 onClick={closeMobileMenu}
             />
         )}

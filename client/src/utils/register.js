@@ -3,7 +3,7 @@ import config from "../config.js"
 
 const baseUrl = `${config.apiUrl}/users`
 
-const register = async credentials => {
+export const register = async credentials => {
     try {
         const response = await axios.post(`${baseUrl}/register`, credentials)
         return response.data
@@ -22,4 +22,3 @@ const register = async credentials => {
     }
 }
 
-export default {register}
